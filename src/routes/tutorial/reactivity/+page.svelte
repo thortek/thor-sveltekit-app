@@ -25,3 +25,4 @@
 <p>{numbers.join(' + ')} = {sum}</p>
 
 <button class="btn variant-outline-primary" on:click={addNumber}>Add a number</button>
+
