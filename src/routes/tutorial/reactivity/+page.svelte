@@ -7,6 +7,8 @@
         count = 9
     }
 
+    $: console.log(`the count is ${count}`)
+
     function handleClick() {
         count += 1
     }
@@ -15,7 +17,7 @@
         numbers = [...numbers, numbers.length + 1]
     }
 
-    $: sum = numbers.reduce((a, n) => a + n, 0)
+    $: sum = numbers.reduce((total, currentNumber) => total + currentNumber, 0)
 </script>
 
 <button class="btn variant-filled-primary w-64 m-4" on:click={handleClick}>
