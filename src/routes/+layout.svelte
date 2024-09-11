@@ -21,5 +21,12 @@
 	import { storePopup } from '@skeletonlabs/skeleton';
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 </script>
-
+<div class="w-full bg-slate-300">
+  <ul class="flex bg-blue-500 justify-evenly text-2xl py-2">
+    <li><a href="/tutorial/introduction">Introduction</a></li>
+    <li>Reactivity</li>
+    <li>Props</li>
+    <li>Logic</li>
+  </ul>
+</div>
 <slot />
