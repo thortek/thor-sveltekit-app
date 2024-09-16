@@ -26,7 +26,7 @@
     <li><a href="/tutorial/introduction">Introduction</a></li>
     <li>Reactivity</li>
     <li>Props</li>
-    <li>Logic</li>
+    <li><a href="/tutorial/logic">Logic</a></li>
   </ul>
 </div>
 <slot />

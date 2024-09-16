@@ -1,9 +1,12 @@
 <script lang="ts">
 	import { faker } from '@faker-js/faker'
 	import { SlideToggle } from '@skeletonlabs/skeleton'
+    import { getRandomNumber } from '$lib/utils/delayFunction'
+    import { ProgressRadial } from '@skeletonlabs/skeleton'
 
 	let avatarsVisible = true
-  let promise = retrievePokemon()
+	let promise = getRandomNumber()
+    let pokePromise = retrievePokemon()
 
 	//const twentyFiveAvatars = Array.from({ length: 25 }, () => faker.image.avatar())
 	const twentyFiveAvatars = [...Array(25)].map(() => {
@@ -27,10 +30,12 @@
 		const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomPokemonId}`)
 		const data = await response.json()
 		console.log(data.sprites.other['official-artwork'].front_default)
-    return data.sprites.other['official-artwork'].front_default
+		return data.sprites.other['official-artwork'].front_default
+       // pokePromise = data.sprites.other['official-artwork'].front_default
 	}
 </script>
 
+<div class="mx-auto flex flex-col items-center">
 <h1 class="m-8">Logic</h1>
 
 <SlideToggle class="bg-sky-600 pr-2" name="slide" bind:checked={avatarsVisible}
@@ -49,14 +54,23 @@
 	<p>Avatars are hidden</p>
 {/if}
 
-<button class="btn btn-lg variant-filled-primary" on:click={retrievePokemon}>
+<!-- <button class="btn btn-lg variant-filled-primary" on:click={retrievePokemon}>
 	Retrieve Random Pokemon
-</button>
+</button> -->
+
+<!-- {#await retrievePokemon()}
+	<ProgressRadial/>
+{:then pokeUrl}
+	<img src={pokeUrl} alt='Random Pokemon'>
+{:catch error}
+	<p style="color: red">{error.message}</p>
+{/await} -->
 
 {#await promise}
-	<p>...waiting</p>
-{:then pokeUrl}
-	<img src={pokeUrl}/>
+	<ProgressRadial/>
+{:then randoNumber}
+	<p>The random number is {randoNumber}</p>
 {:catch error}
 	<p style="color: red">{error.message}</p>
 {/await}
+</div>
