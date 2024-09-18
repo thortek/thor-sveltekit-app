@@ -1,5 +1,11 @@
 <script lang="ts">
+    import Messenger from "$lib/components/Messenger.svelte";
+
 let m = {x: 0, y: 0}
+
+function handleMessage(event: CustomEvent) {
+    alert(event.detail.text)
+}
 
 </script>
 
@@ -12,3 +18,4 @@ let m = {x: 0, y: 0}
 </div>
 
 <button class="btn variant-filled-primary m-4" on:click|once={() => alert('Thanks for clicking this one time!')}>Click me once... and only once!</button>
+<Messenger on:foo={handleMessage}/>
