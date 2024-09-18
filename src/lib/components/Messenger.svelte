@@ -4,7 +4,7 @@ import { createEventDispatcher } from "svelte";
 const dispatch = createEventDispatcher();
 
 function sayHello() {
-    dispatch('foo', {
+    dispatch('message', {
         text: 'Hello! My name is Inigo Montoya. You killed my father. Prepare to die.'
     })
 }
