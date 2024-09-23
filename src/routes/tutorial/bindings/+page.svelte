@@ -67,7 +67,7 @@
 			<h2>What flavor?</h2>
 		{/each}
 		<!-- also allow flavor selections -->
-		{#each ['Vanilla', 'Chocolate', 'Strawberry'] as flavor}
+		{#each ['Extreme Moose Tracks', 'Chocolate', 'Strawberry'] as flavor}
 			<label class="label">
 				<input
 					class="checkbox"
