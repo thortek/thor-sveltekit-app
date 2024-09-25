@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { marked } from 'marked'
+
+	let value = `Some words are *italic*, some are **bold**\n\n- lists\n- are\n- cool`;
 	let wantSpam = false
 	let selected: any
 	let answer = ''
@@ -60,15 +63,15 @@
 	<form>
 		{#each [1, 2, 3] as number}
 			<label class="label">
-				<input class="radio" type="radio" value={number} bind:group={scoops} />
-				How many scoops? {number}
+				<input class="radio m-2" type="radio" value={number} bind:group={scoops} />
+				{number}
 				{number === 1 ? 'scoop' : 'scoops'}</label>
 
-			<h2>What flavor?</h2>
+			
 		{/each}
 		<!-- also allow flavor selections -->
 		{#each ['Extreme Moose Tracks', 'Chocolate', 'Strawberry'] as flavor}
-			<label class="label">
+			<label class="label m-2">
 				<input
 					class="checkbox"
 					type="checkbox"
@@ -90,5 +93,25 @@
 				of {flavors}
 			</p>
 		{/if}
+
+		<hr class="my-4" />
+		<!-- Adding a select that allows multiple selections-->
+		 <select class="select w-1/3 text-center" multiple bind:value={flavors}>
+			{#each ['cookies and cream', 'mint choc chip', 'rocky road', 'graham canyon'] as flavor}
+			<option>{flavor}</option>
+			{/each}
+		 </select>
 	</form>
 </div>
+
+<div class="card m-4 p-4 w-2/3 mx-auto">
+<div class="grid grid-cols-[5rem_1fr] gap-4">
+	input
+	<textarea class="textarea resize-none" rows="5" bind:value></textarea>
+
+	output
+	<div>{@html marked(value)}</div>
+</div>
+
+</div>
+
