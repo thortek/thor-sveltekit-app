@@ -1,14 +1,15 @@
-# create-svelte
+# Thor's SvelteKit app
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+Insecure Questions component: [`InsecureQuestions.svelte`](https://github.com/thortek/thor-sveltekit-app/tree/main/src/lib/components/InsecureQuestions.svelte).
 
-## Creating a project
+This is where you can find the code for my Insecure Questions component. I will be using this component in my SvelteKit app.
+
+## More about my project
 
 If you're seeing this, you've probably already done this step. Congrats!
 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
+# example of using ```bash to show terminal code in markdown
 
 # create a new project in my-app
 npm create svelte@latest my-app
@@ -16,7 +17,7 @@ npm create svelte@latest my-app
 
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Example of showing terminal commands: `npm install` (or `pnpm install` or `yarn`), start a development server:
 
 ```bash
 npm run dev
@@ -35,4 +36,4 @@ npm run build
 
 You can preview the production build with `npm run preview`.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+> This is an aside with extra directions or information.

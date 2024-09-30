@@ -1,61 +1,16 @@
 <script lang="ts">
+	import InsecureQuestions from '$lib/components/InsecureQuestions.svelte'
 	import { marked } from 'marked'
 
-	let value = `Some words are *italic*, some are **bold**\n\n- lists\n- are\n- cool`;
-	let wantSpam = false
-	let selected: any
-	let answer = ''
+	let value = `Some words are *italic*, some are **bold**\n\n- lists\n- are\n- cool`
+
 	let scoops = 1
 	let flavors: any = []
 
 	//$: console.log(selected)
-
-	let questions = [
-		{
-			id: 1,
-			text: `Where did you go to school?`
-		},
-		{
-			id: 2,
-			text: `What is your mother's name?`
-		},
-		{
-			id: 3,
-			text: `What is the mascot for SHS?`
-		}
-	]
-
-	function handleSubmit() {
-		alert(`You answered: ${answer} to the question: ${selected.text} with the id of ${selected.id}`)
-	}
 </script>
 
-<div class="card m-4 p-4 w-2/3 mx-auto">
-	<h2>Insecurity questions</h2>
-	<form on:submit|preventDefault={handleSubmit}>
-		<label class="label">
-			<input class="checkbox" type="checkbox" bind:checked={wantSpam} />
-			Yes! Please send me all the spam!
-		</label>
-
-		<select class="select m-2" bind:value={selected} on:change={() => (answer = '')}>
-			{#each questions as question}
-				<option value={question}>{question.text}</option>
-			{/each}
-		</select>
-
-		<input class="input" bind:value={answer} />
-		<button class="btn variant-filled-primary mt-2" disabled={!answer} type="submit">Submit</button>
-	</form>
-</div>
-
-<div class="card m-4 p-4 w-2/3 mx-auto">
-	{#if wantSpam}
-		<p>Thank you for signing up for spam!</p>
-	{:else}
-		<p>You must opt in to continue. If you're not paying, you're the product.</p>
-	{/if}
-</div>
+<InsecureQuestions />
 
 <!-- make a new card with a form element for selecting ice cream scoops and flavours.  Be sure to use the bind:group directive-->
 <div class="card m-4 p-4 w-2/3 mx-auto">
@@ -66,8 +21,6 @@
 				<input class="radio m-2" type="radio" value={number} bind:group={scoops} />
 				{number}
 				{number === 1 ? 'scoop' : 'scoops'}</label>
-
-			
 		{/each}
 		<!-- also allow flavor selections -->
 		{#each ['Extreme Moose Tracks', 'Chocolate', 'Strawberry'] as flavor}
@@ -96,22 +49,20 @@
 
 		<hr class="my-4" />
 		<!-- Adding a select that allows multiple selections-->
-		 <select class="select w-1/3 text-center" multiple bind:value={flavors}>
+		<select class="select w-1/3 text-center" multiple bind:value={flavors}>
 			{#each ['cookies and cream', 'mint choc chip', 'rocky road', 'graham canyon'] as flavor}
-			<option>{flavor}</option>
+				<option>{flavor}</option>
 			{/each}
-		 </select>
+		</select>
 	</form>
 </div>
 
 <div class="card m-4 p-4 w-2/3 mx-auto">
-<div class="grid grid-cols-[5rem_1fr] gap-4">
-	input
-	<textarea class="textarea resize-none" rows="5" bind:value></textarea>
+	<div class="grid grid-cols-[5rem_1fr] gap-4">
+		input
+		<textarea class="textarea resize-none" rows="5" bind:value></textarea>
 
-	output
-	<div>{@html marked(value)}</div>
+		output
+		<div>{@html marked(value)}</div>
+	</div>
 </div>
-
-</div>
-
