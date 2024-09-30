@@ -1,6 +1,6 @@
 # Thor's SvelteKit app
 
-Insecure Questions component: [`InsecureQuestions.svelte`](https://github.com/thortek/thor-sveltekit-app/tree/main/src/lib/components/InsecureQuestions.svelte).
+Insecure Questions component: [`InsecureQuestions.svelte`](/src/lib/components/InsecureQuestions.svelte).
 
 This is where you can find the code for my Insecure Questions component. I will be using this component in my SvelteKit app.
 
