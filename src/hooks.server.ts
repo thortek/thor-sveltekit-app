@@ -1,0 +1,1 @@
+//console.log('Hello from hooks.server.ts', process.env.MONGO_DB_URL);

@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 
+	//export let data:any
+
 	let starWarsCharacter: { name: string; height: string; mass: string, id: string } = {
 		name: '',
 		height: '',
@@ -10,6 +12,7 @@
 
 	onMount(() => {
 		console.log('onMount')
+		//console.log(data)
 		getStarWarsCharacter()
 		return () => {
 			console.log('onDestroy')
