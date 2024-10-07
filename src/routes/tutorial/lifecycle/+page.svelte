@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
+	import { starWarsCharacterStore } from '$lib/stores/starWarsCharacter';
+	import { get } from 'svelte/store'
 
 	//export let data:any
 
@@ -14,6 +16,7 @@
 		console.log('onMount')
 		//console.log(data)
 		getStarWarsCharacter()
+		console.log(get(starWarsCharacterStore))
 		return () => {
 			console.log('onDestroy')
 		}
@@ -32,6 +35,10 @@
             mass: data.mass,
             id: randomCharacterId.toString()
         }
+		// check for duplicates here... not in the store subscribe method
+
+		
+		starWarsCharacterStore.update(characters => [...characters, starWarsCharacter])
 	}
 </script>
 
