@@ -8,9 +8,20 @@ interface StarWarsCharacter {
 	id: string
 }
 
-export const starWarsCharacterStore: Writable<StarWarsCharacter[]> = writable([])
+const initialValue = browser ? JSON.parse(localStorage.getItem('starWarsCharacters') || '[]') : []
 
+export const starWarsCharacterStore: Writable<StarWarsCharacter[]> = writable(initialValue)
+
+// Store the characters in local storage
 starWarsCharacterStore.subscribe((value) => {
+	//console.log('starWarsCharacterStore.subscribe:', value)
+	if (browser) {
+		localStorage.setItem('starWarsCharacters', JSON.stringify(value))
+	}
+})
+
+
+/* starWarsCharacterStore.subscribe((value) => {
 
 	try {
 		// Create a Set to store unique IDs
@@ -35,4 +46,4 @@ starWarsCharacterStore.subscribe((value) => {
 	} catch (error) {
 		console.error('Error filtering characters:', error)
 	}
-})
+}) */
