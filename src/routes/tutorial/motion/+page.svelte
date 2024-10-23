@@ -68,8 +68,8 @@
         <div class="flex gap-4">
             {#if visible}
             <img src="https://place.dog/300/200" alt="Dog" transition:fly={{ y: 400, duration: 1000 }} />
-            <img src="https://place.dog/300/200" alt="Dog" transition:fade />
-            <img src="https://place.dog/300/200" alt="Dog" in:fly={{ y: 200, duration: 2000}} out:fade />
+            <img src="/bizarro_squidward.png" alt="Bizarro Squidward" width="300" transition:fade />
+            <img src="/greek_god_fight.png" alt="Greek fighting" width="300" in:fly={{ y: 200, duration: 2000}} out:fade />
             <div class="bg-red-400 w-24 h-24" transition:fade={{ duration: 1000 }}></div>
             {/if}
         </div>
