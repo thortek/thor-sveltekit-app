@@ -10,6 +10,19 @@
 	import css from 'highlight.js/lib/languages/css';
 	import javascript from 'highlight.js/lib/languages/javascript';
 	import typescript from 'highlight.js/lib/languages/typescript';
+	import AuthButton from '$lib/components/AuthButton.svelte';
+
+	// Handling authentication section
+	import { currentUser } from '$lib/stores/currentUser';
+
+	// Here is the data that is passed to the layout from the layout.server.ts load() function
+	export let data
+
+	console.log('layout data', data)
+
+	currentUser.set(data?.userProfile)
+
+	// Register languages
 
 	hljs.registerLanguage('xml', xml); // for HTML
 	hljs.registerLanguage('css', css);
@@ -32,6 +45,9 @@
 	<li><a href="/tutorial/bindings">Bindings</a></li>
 	<li><a href="/tutorial/lifecycle">Lifecycle</a></li>
   </ul>
+  <div class="flex">
+  <AuthButton />
   <ThemeMenu />
+  </div>
 </div>
 <slot />
