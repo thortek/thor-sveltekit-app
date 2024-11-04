@@ -12,6 +12,7 @@ export async function load({ params }) {
             id: retrievedPokemon.id,
             image: retrievedPokemon.sprites.other['official-artwork'].front_default,
             moves: retrievedPokemon.moves.map((move: any) => move.move.name),
+            types: retrievedPokemon.types.map((type: any) => type.type.name),
         }
     }
 }

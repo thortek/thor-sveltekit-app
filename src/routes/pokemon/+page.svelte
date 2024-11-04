@@ -7,7 +7,7 @@
 		const randomPokemonID = Math.floor(Math.random() * 900) + 1
 		const res = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${randomPokemonID}&limit=25`)
 		const data = await res.json()
-		console.log(data)
+		//console.log(data)
 		pokeDex = data.results
 	})
 </script>
