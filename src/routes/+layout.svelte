@@ -18,7 +18,7 @@
 	// Here is the data that is passed to the layout from the layout.server.ts load() function
 	export let data
 
-	console.log('layout data', data)
+	//console.log('layout data', data)
 
 	currentUser.set(data?.userProfile)
 
