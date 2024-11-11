@@ -2,6 +2,11 @@ import adapter from '@sveltejs/adapter-vercel';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import dotenv from 'dotenv';
 dotenv.config();
+//console.log(process.env)
+
+// Load environment variables depending on being in production or development (local)
+//const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.local';
+//dotenv.config({ path: envFile });
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
