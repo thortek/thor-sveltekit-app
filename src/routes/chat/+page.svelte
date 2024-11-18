@@ -1,8 +1,18 @@
 <script lang="ts">
-    import { marked } from 'marked'
-    import { chatHistoryStore } from '$lib/stores/chatHistoryStore'
+	import { marked } from 'marked'
+	import { chatHistoryStore } from '$lib/stores/chatHistoryStore'
+	import { readableStreamStore } from '$lib/stores/readableStreamStore'
+	import TypingIndicator from '$lib/utils/typingIndicator.svelte'
 
-	let answerText = ''
+	const response = readableStreamStore()
+
+	let responseText = ''
+
+	$: if ($response.text !== '') {
+		;(async () => {
+			responseText = await marked.parse($response.text)
+		})() // Immediately invoke the async function to update the responseText (IIFE)
+	}
 
 	async function handleSubmit(this: HTMLFormElement, event: Event) {
 		event.preventDefault()
@@ -10,22 +20,32 @@
 		const message = formData.get('message') as string
 		console.log(message)
 
-        if (message == '') return
+		if (message == '') return
 
-        // Update the chat history store with the user's message
-        $chatHistoryStore = [...$chatHistoryStore, { role: 'user', content: message}]
+		// Update the chat history store with the user's message
+		$chatHistoryStore = [...$chatHistoryStore, { role: 'user', content: message }]
 
-        const response = await fetch('/api/chat', {
-            method: 'POST',
-            body: JSON.stringify({ chats: $chatHistoryStore }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+		try {
+			const answer = response.request(
+                new Request('/api/chat', {
+				method: 'POST',
+				body: JSON.stringify({ chats: $chatHistoryStore }),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+            )
 
-        const results = await response.json()
-        //console.log(results)
-        answerText = results.message
+            this.reset()
+
+            const answerText = (await answer) as string
+
+            // Update the chat history store with the bot's response
+            $chatHistoryStore = [...$chatHistoryStore, { role: 'assistant', content: answerText }]
+            
+		} catch (error) {
+			console.error('Error:', error)
+		}
 	}
 </script>
 
@@ -33,5 +53,5 @@
 	<input class="input" type="text" name="message" />
 	<button class="btn variant-filled-primary w-24" type="submit">Send</button>
 
-    <div>{@html marked(answerText)}</div>
+	<div>{@html marked(answerText)}</div>
 </form>
