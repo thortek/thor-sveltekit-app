@@ -65,6 +65,7 @@
 						<div class="user-chat">{chat.content}</div>
 					</div>
 				{/if}
+                <!-- handle the case where chat.role === 'assistant'-->
 			{/each}
 		</div>
 		<hr class="my-2" />
