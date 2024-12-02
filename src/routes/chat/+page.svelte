@@ -53,27 +53,38 @@
 	function deleteAllChats() {
 		chatHistoryStore.set([])
 	}
+
+	function deleteChat(chat: { role: 'user' | 'assistant'; content: string }) {
+		return () => chatHistoryStore.set($chatHistoryStore.filter((c) => c !== chat))
+	}
+
 </script>
 
-<main class="flex flex-col space-y-2 p-1">
-	<form class="flex flex-col gap-2 m-2 w-3/4 mx-auto" on:submit={handleSubmit}>
-		<div>
+<main class="flex flex-col w-screen">
+	<form class="flex flex-col w-3/4 mx-auto space-y-4" on:submit={handleSubmit}>
+		<div class="flex flex-col space-y-4 w-full">
 			{#await new Promise((resolve) => setTimeout(resolve, 400)) then _}
-				<div class="flex group/chat hover:bg-gray-400 hover:rounded-lg">
+				<div class="flex space-x-2">
 					<Avatar class="h-12" src="/img-tutor-girl.png" alt="Tutor" width="w-12" />
 					<div in:fly={{y: 50, duration: 1000}} class="assistant-chat">Hello! How can I help you today?</div>
 				</div>
 			{/await}
 			{#each $chatHistoryStore as chat}
 				{#if chat.role === 'user'}
-					<div class="flex justify-end">
+					<div class="flex justify-end group/chat hover:bg-gray-400 hover:rounded-lg ml-auto space-x-1">
 						<Avatar class="h-12 shrink-0" src="/PikaThorAnime.png" alt="Tutor" width="w-12" />
 						<div in:fly={{y: 50, duration: 1000}} class="user-chat">{chat.content}</div>
+						<button type="button" class="group/delete invisible btn-icon h-6 w-6 group-hover/chat:visible" on:click={deleteChat(chat)}>
+							<img src="/x-circle-close-delete.svg" alt="Delete Chat" />
+						</button>
 					</div>
 				{:else}
-					<div class="flex justify-end">
+					<div class="flex justify-end group/chat hover:bg-gray-400 hover:rounded-lg ml-auto space-x-1">
 						<Avatar class="h-12 shrink-0" src="/img-tutor-girl.png" alt="Tutor" width="w-12" />
 						<div in:fly={{y: 50, duration: 1000}} class="assistant-chat">{@html chat.content}</div>
+						<button type="button" class="group/delete invisible btn-icon h-6 w-6 group-hover/chat:visible" on:click={deleteChat(chat)}>
+							<img src="/x-circle-close-delete.svg" alt="Delete Chat" />
+						</button>
 					</div>
 				{/if}
 				<!-- handle the case where chat.role === 'assistant'-->
