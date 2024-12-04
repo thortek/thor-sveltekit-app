@@ -1,6 +1,8 @@
 import OpenAI from 'openai'
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY as string })
+// As an example, add the following to your .env file
+// OPENAI_API_KEY=sk-203984sjeirj39kshjowieurwerwerwe
 
 /* const openai = new OpenAI({
 	baseURL: 'http://localhost:11434/v1',
@@ -38,7 +40,7 @@ export const POST = async ({ request }) => {
 		const stream = await openai.chat.completions.create({
 			//model: 'llama3.2',
 			model: 'gpt-4o',
-			messages: [{ role: 'system', content: 'You are a helpful web development expert.' },
+			messages: [{ role: 'system', content: 'You are a helpful assistant.' },
 				...body.chats
 			],
 			stream: true
