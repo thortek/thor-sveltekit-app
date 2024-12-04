@@ -1,9 +1,11 @@
 import OpenAI from 'openai'
 
-const openai = new OpenAI({
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY as string })
+
+/* const openai = new OpenAI({
 	baseURL: 'http://localhost:11434/v1',
 	apiKey: 'ollama' // required but unused
-})
+}) */
 
 export type MessageBody = { chats: { role: 'user' | 'assistant'; content: string }[] }
 
@@ -34,8 +36,9 @@ export const POST = async ({ request }) => {
 
 	try {
 		const stream = await openai.chat.completions.create({
-			model: 'llama3.2',
-			messages: [{ role: 'system', content: rubberDuckPrompt },
+			//model: 'llama3.2',
+			model: 'gpt-4o',
+			messages: [{ role: 'system', content: 'You are a helpful web development expert.' },
 				...body.chats
 			],
 			stream: true
